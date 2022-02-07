@@ -8,7 +8,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 // To override the database name, set the DATABASE_NAME environment variable in the .env file
-const DATABASE_NAME = process.env.DATABASE_NAME || 'azure-todo-app';
+const DATABASE_NAME = process.env.DATABASE_NAME || 'azure-check-list-app';
 
 mongoose.connect(process.env.DATABASE_URL, {
     dbName: DATABASE_NAME,
@@ -24,4 +24,4 @@ mongoose.connection
     console.log(`Connection error: ${err.message}`);
   });
 
-  require('./models/task');
+  require('./models/checklist');

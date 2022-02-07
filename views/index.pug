@@ -2,43 +2,43 @@ extends layout
 
 block content
 
-  form(action='./addTask' method='POST' class='form-registration')
+  form(action='./addChecklist' method='POST' class='form-registration')
     div(class='row my-3')
         div(class='col-md-2 align-bottom')
           label(for="taskName" class='fs-5') New task
         div(class='col-md-8')
-          input(class="form-control form-control-sm" type="text" name='taskName', placeholder="Enter new task here" )
+          input(class="form-control form-control-sm" type="text" name='checklistName', placeholder="Enter new check list name here" )
         div(class='col-md-2 text-end')
-          button(class='btn btn-success btn-sm' type='submit') Add task
+          button(class='btn btn-success btn-sm' type='submit') Create a new check list
 
 
   h5(class='my-2') Current tasks
 
   div(class='row mb-3 border-bottom border-3')
-    div(class='col-md-6 fw-bold') Task
+    div(class='col-md-6 fw-bold') Check list
     div(class='col-md-2 fw-bold') Created
     div(class='col-md-4 fw-bold') Action
 
-  each task in currentTasks
+  each checklist in currentChecklists
     div(class='row mb-2')
-      div(class='col-sm-6') #{task.taskName}
-      div(class='col-sm-2') #{format(task.createDate, "yyyy-MM-dd")}
+      div(class='col-sm-6') #{checklist.checklistName}
+      div(class='col-sm-2') #{format(checklist.createDate, "yyyy-MM-dd")}
       div(class='col-sm-2')
-        form(action='./completeTask' method='POST' class='form-registration')
-          input(type='hidden' name='_id' value=`${task._id}`)
-          button(class='btn btn-primary btn-sm mx-1' type='submit') Complete
+        form(action='./editChecklist' method='POST' class='form-registration')
+          input(type='hidden' name='_id' value=`${checklist._id}`)
+          button(class='btn btn-primary btn-sm mx-1' type='submit') Edit
       div(class='col-sm-2')
-        form(action='./deleteTask' method='POST' class='form-registration')
-          input(type='hidden' name='_id' value=`${task._id}`)
-          button(class='btn btn-danger btn-sm mx-1') Delete
+        form(action='./cloneChecklist' method='POST' class='form-registration')
+          input(type='hidden' name='_id' value=`${checklist._id}`)
+          button(class='btn btn-danger btn-sm mx-1') Clone
 
   h5(class='my-2') Completed tasks
   div(class='row mb-3 border-bottom border-3')
-    div(class='col-sm-8 fw-bold') Task
+    div(class='col-sm-8 fw-bold') Check list
     div(class='col-sm-2 fw-bold') Created
     div(class='col-sm-2 fw-bold') Completed
-  each task in completedTasks
+  each task in completedChecklists
     div(class='row mb-3')
-      div(class='col-sm-8') #{task.taskName}
-      div(class='col-sm-2') #{format(task.createDate, "yyyy-MM-dd")}
-      div(class='col-sm-2') #{format(task.completedDate, "yyyy-MM-dd")}
+      div(class='col-sm-8') #{checklist.checklistName}
+      div(class='col-sm-2') #{format(checklist.createDate, "yyyy-MM-dd")}
+      div(class='col-sm-2') #{format(checklist.completedDate, "yyyy-MM-dd")}
